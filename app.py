@@ -22,10 +22,10 @@ app = Flask(__name__)
 # Create a ZipFile Object and load sample.zip in it
 
 # Model saved with Keras model.save()
-MODEL_PATH ='model_VGG16.h5'
+# MODEL_PATH ='model_VGG16.h5'
 
 # Load your trained model
-model = load_model(MODEL_PATH)
+# model = load_model(MODEL_PATH)
 
 
 
