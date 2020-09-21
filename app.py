@@ -20,9 +20,7 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 
 # Create a ZipFile Object and load sample.zip in it
-with ZipFile('model_VGG16.zip', 'r') as zipObj:
-   # Extract all the contents of zip file in current directory
-   zipObj.extractall()
+
 # Model saved with Keras model.save()
 MODEL_PATH ='model_VGG16.h5'
 
