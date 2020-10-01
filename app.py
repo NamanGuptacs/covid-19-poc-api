@@ -22,16 +22,16 @@ app = Flask(__name__)
 # Create a ZipFile Object and load sample.zip in it
 
 # Model saved with Keras model.save()
-MODEL_PATH ='model_VGG16.h5'
+# MODEL_PATH ='model_VGG16.h5'
 
 # Load your trained model
-model = load_model(MODEL_PATH)
+model = load_model("model_VGG16.h5")
 
 
 
 
 
-def model_predict(img_path, model):
+def model_predict(img_path):
     img = image.load_img(img_path, target_size=(224, 224))
 
     # Preprocessing the image
@@ -57,28 +57,26 @@ def model_predict(img_path, model):
     return preds
 
 
-@app.route('/')
-def index():
-    # Main page
-    return render_template('index.html')
+@app.route("/", methods=['GET', 'POST'])
+def home():
+        return render_template('index.html')
 
-
-@app.route('/predict', methods=['POST'])
-def upload():
-    if request.method == 'POST':
-        # Get the file from post request
-        f = request.files['file']
-
-        # Save the file to ./uploads
-        basepath = os.path.dirname(__file__)
-        file_path = os.path.join(basepath, 'uploads', secure_filename(f.filename))
-        f.save(file_path)
-
-        # Make prediction
-        preds = model_predict(file_path, model)
-        result=preds
-        return result
-    return None
+@app.route("/predict", methods = ['GET','POST'])
+def predict():
+     if request.method == 'POST':
+        file = request.files['image'] # fet input
+        filename = file.filename        
+        print("@@ Input posted = ", filename)
+         
+        file_path = os.path.join('uploaded', filename)
+        file.save(file_path)
+ 
+        print("@@ Predicting class......")
+        pred = model_predict(file_path)
+               
+        return render_template('index.html', prediction_text = pred, user_image = file_path)
+     
+   
 
 
 if __name__ == '__main__':
