@@ -49,22 +49,15 @@
 
 <div>
     <form action="{{ url_for('predict')}}" id="upload-file" method="post" enctype="multipart/form-data">
-        <label for="imageUpload" class="upload-label">
-            Choose...
-        </label>
-        <input type="file" name="file" id="imageUpload" accept=".png, .jpg, .jpeg">
-    
-
-    <div class="image-section" style="display:none;">
-        <div class="img-preview">
-            <div id="imagePreview">
-            </div>
-        </div>
-        <div>
-            <button type="button" class="btn btn-primary btn-lg " id="btn-predict">Predict!</button>
-        </div>
+        <span class="text-left btn btn-default btn-file">
+            Upload Image <input type="file" name="image">
+        </span>   
+     
+        <span class="text-right">
+          <input type="submit" value="Predict" class="btn btn-primary">
+        </span>
+      </form>
     </div>
-    </form>
     <div class="col-sm">
       <span class="border border-primary">
         <img src="{{ user_image }}" alt="User Image" class="img-thumbnail">
@@ -75,7 +68,6 @@
       <h1>It's <span class="badge badge-secondary">{{ prediction_text }}</span></h1>
     </div>
      
-</div>
 </div>
 </body>
 </html>  
